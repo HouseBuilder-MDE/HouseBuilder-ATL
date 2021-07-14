@@ -1,0 +1,152 @@
+-- @path HouseBuilderV2=/it.univaq.disim.housebuilder.atl/housebuilderV2.ecore
+-- @path HouseBuilder=/it.univaq.disim.housebuilder.atl/housebuilder.ecore
+
+module HouseBuilder2HouseBuilderV2;
+create OUT : HouseBuilderV2 from IN : HouseBuilder;
+
+
+rule House {
+	from
+		src : HouseBuilder!House
+	to
+		trg : HouseBuilderV2!House (
+			address <- src.address,
+			buildingDate <- src.buildingDate,
+			city <- src.city,
+			name <- src.name,
+			postalCode <- src.postalCode,
+			province <- src.province,
+			state <- src.state	
+		)
+}
+
+rule Floor {
+	from
+		src : HouseBuilder!Floor
+	to
+		trg : HouseBuilderV2!Floor (
+			name <- src.name,
+			level <- src.level,
+			house <- src.house
+		) 
+}
+
+
+rule Room {
+	from
+		src : HouseBuilder!Room
+	to 
+		trg : HouseBuilderV2!Room (
+			name <- src.name,
+			floor <- src.floor,
+			height <- src.height,
+			length <- src.length,
+			name <- src.name,
+			passagesA <- src.passagesA,
+			passagesB <- src.passagesB,
+			roomType <- src.roomType,
+			width <- src.width
+		)
+}
+
+
+rule Door2Passage {
+	from
+		src : HouseBuilder!Door
+	to
+		trg : HouseBuilderV2!Passage (
+			house <- src.house,
+			name <- src.name,
+			doorType <- src.doorType,
+			height <- src.height,
+			spaceA <- src.spaceA,
+			spaceB <- src.spaceB,
+			width <- src.width,
+			devices <- src.devices
+		)
+}
+
+rule Device {
+	from
+		src : HouseBuilder!Device
+	to
+		trg : HouseBuilderV2!Device (
+			name <- src.name,
+			type <- src.type,
+			model <- src.model,
+			passage <- src.passage,
+			space <- src.space
+		)
+}
+
+rule OuterSpace2ExternalSpace {
+	from
+		outSp : HouseBuilder!OuterSpace
+	to
+		extSp : HouseBuilderV2!ExternalSpace (
+			name <- outSp.name,
+			type <- outSp.type,
+			ground <- outSp.ground,
+			floor <- outSp.floor,
+			width <- outSp.width,
+			length <- outSp.length
+		)
+}
+
+
+rule Window {
+	from
+		src : HouseBuilder!Window
+	to
+		trg : HouseBuilderV2!Window (
+			name <- src.name,
+			doorsNumber <- src.doorsNumber,
+			width <- src.width,
+			height <- src.height,
+			room <- src.room
+		)
+}
+
+rule Controller {
+	from
+		src : HouseBuilder!Controller
+	to
+		trg : HouseBuilderV2!Controller (
+			name <- src.name,
+			model <- src.model,
+			os <- src.os,
+			osVersion <- src.osVersion,
+			house <- src.house,
+			actuators <- src.actuators
+		)
+}
+
+rule Actuator {
+	from
+		src : HouseBuilder!Actuator
+	to
+		trg : HouseBuilderV2!Actuator (
+			name <- src.name,
+			model <- src.model,
+			type <- src.type,
+			controller <- src.controller,
+			device <- src.device
+		)
+}
+
+rule Sensor {
+	from
+		src : HouseBuilder!Sensor
+	to
+		trg : HouseBuilderV2!Sensor (
+			name <- src.name,
+			model <- src.model,
+			value <- src.value,
+			type <- src.type,
+			space <- src.space,
+			controller <- src.controller
+		)
+}
+
+
+
