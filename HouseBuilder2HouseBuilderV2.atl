@@ -141,7 +141,6 @@ rule Sensor {
 		trg : HouseBuilderV2!Sensor (
 			name <- src.name,
 			model <- src.model,
-			value <- src.value,
 			type <- src.type,
 			space <- src.space,
 			controller <- src.controller
