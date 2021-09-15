@@ -6,28 +6,12 @@
 	</projects>
 	<buildSpec>
 		<buildCommand>
-			<name>org.eclipse.ocl.pivot.ui.oclbuilder</name>
+			<name>org.eclipse.m2m.atl.adt.builder.atlBuilder</name>
 			<arguments>
-				<dictionary>
-					<key>disabledExtensions</key>
-					<value>*,essentialocl</value>
-				</dictionary>
-				<dictionary>
-					<key>disabledPaths</key>
-					<value>bin/**,target/**</value>
-				</dictionary>
-				<dictionary>
-					<key>enabledExtensions</key>
-					<value>ecore,ocl,oclinecore,oclstdlib,uml</value>
-				</dictionary>
-				<dictionary>
-					<key>enabledPaths</key>
-					<value>**</value>
-				</dictionary>
 			</arguments>
 		</buildCommand>
 	</buildSpec>
 	<natures>
-		<nature>org.eclipse.ocl.pivot.ui.oclnature</nature>
+		<nature>org.eclipse.m2m.atl.adt.builder.atlNature</nature>
 	</natures>
 </projectDescription>

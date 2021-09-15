@@ -42,29 +42,13 @@ rule Room {
 			height <- src.height,
 			length <- src.length,
 			name <- src.name,
-			passagesA <- src.passagesA,
-			passagesB <- src.passagesB,
 			roomType <- src.roomType,
 			width <- src.width
 		)
 }
 
 
-rule Door2Passage {
-	from
-		src : HouseBuilder!Door
-	to
-		trg : HouseBuilderV2!Passage (
-			house <- src.house,
-			name <- src.name,
-			doorType <- src.doorType,
-			height <- src.height,
-			spaceA <- src.spaceA,
-			spaceB <- src.spaceB,
-			width <- src.width,
-			devices <- src.devices
-		)
-}
+
 
 rule Device {
 	from
@@ -147,5 +131,31 @@ rule Sensor {
 		)
 }
 
+rule Passage {
+	from
+		src : HouseBuilder!Passage (src.spaceA.floor.level=src.spaceB.floor.level)
+	to
+		trg : HouseBuilderV2!Passage (
+			house <- src.house,
+			name <- src.name,
+			doorType <- src.doorType,
+			height <- src.height,
+			spaceA <- src.spaceA,
+			spaceB <- src.spaceB,
+			width <- src.width,
+			devices <- src.devices
+		)
+}
 
+rule Passage2Stair {
+	from
+		src : HouseBuilder!Passage (src.spaceA.floor.level<>src.spaceB.floor.level)
+	to
+		trg : HouseBuilderV2!Stair (
+			house <- src.house,
+			name <- src.name,
+			spaceA <- src.spaceA,
+			spaceB <- src.spaceB
+		)
 
+}
